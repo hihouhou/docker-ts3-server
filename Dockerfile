@@ -31,8 +31,7 @@ COPY ts3server.ini ${TS3_DIR}
 
 #Run TS3
 #ENTRYPOINT ["ts3server_minimal_runscript.sh"]
-#CMD ["/usr/local/src/teamspeak3-server_linux-amd64/ts3server_minimal_runscript.sh", "inifile=ts3server.ini"]
-CMD ["/usr/local/src/teamspeak3-server_linux-amd64/ts3server_minimal_runscript.sh"]
+CMD ["/usr/local/src/teamspeak3-server_linux-amd64/ts3server_minimal_runscript.sh", "inifile=ts3server.ini"]
 
 # Expose the Standard TS3 port.
 EXPOSE 9987/udp
