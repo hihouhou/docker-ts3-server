@@ -10,7 +10,7 @@ MAINTAINER hihouhou < hihouhou@hihouhou.com >
 
 ## Set some variables for override.
 # Download Link of TS3 Server
-ENV TS3_TGZ teamspeak3-server_linux-amd64-3.0.11.2.tar.gz
+ENV TS3_TGZ teamspeak3-server_linux-amd64-3.0.11.4.tar.gz
 ENV TEAMSPEAK_URL http://dl.4players.de/ts/releases/3.0.11.2/${TS3_TGZ}
 
 # path for ts3 directory
