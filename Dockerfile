@@ -10,32 +10,26 @@ MAINTAINER hihouhou < hihouhou@hihouhou.com >
 
 ## Set some variables for override.
 # Download Link of TS3 Server
-ENV TS3_TGZ teamspeak3-server_linux_amd64-3.0.12.3.tar.bz2
-ENV TEAMSPEAK_URL http://dl.4players.de/ts/releases/3.0.12.3/${TS3_TGZ}
+ENV TS3_VERSION 3.1.1 
+ENV TEAMSPEAK_URL http://dl.4players.de/ts/releases/$TS3_VERSION/teamspeak3-server_linux_amd64-$TS3_VERSION.tar.bz2
 
 # Update & install packages for graylog
 RUN apt-get update && \
-    apt-get install -y bzip2
+    apt-get install -y bzip2 wget
 
 # path for ts3 directory
-WORKDIR /usr/local/src/teamspeak3-server_linux-amd64
-ENV TS3_DIR /usr/local/src/teamspeak3-server_linux-amd64/
+WORKDIR /usr/local/src/teamspeak3-server_linux_amd64
+ENV TS3_DIR /usr/local/src/teamspeak3-server_linux_amd64/
 
 # Inject a Volume for any TS3-Data that needs to be persisted or to be accessible from the host. (e.g. for Backups)
 VOLUME ["/var/lib/backup/teamspeak3","/var/log/ts3"]
 
 # Download TS3 file and extract it into /opt.
-ADD ${TEAMSPEAK_URL} /tmp/
-RUN cd /usr/local/src/ && tar xvf /tmp/${TS3_TGZ}
+RUN cd /tmp && wget $TEAMSPEAK_URL
+RUN cd /usr/local/src/ && \
+    tar xf /tmp/teamspeak3-server_linux_amd64-$TS3_VERSION.tar.bz2
 COPY ts3server.ini ${TS3_DIR}
 
-#check file
-RUN ls -l ${TS3_DIR}
-RUN ls -l /tmp/
-
-#Run TS3
-#ENTRYPOINT ["ts3server_minimal_runscript.sh"]
-CMD ["/usr/local/src/teamspeak3-server_linux-amd64/ts3server_minimal_runscript.sh", "inifile=ts3server.ini"]
 
 # Expose the Standard TS3 port.
 EXPOSE 9987/udp
@@ -43,3 +37,6 @@ EXPOSE 9987/udp
 EXPOSE 30033
 # for ServerQuery
 EXPOSE 10011
+
+#Run TS3
+CMD ["/usr/local/src/teamspeak3-server_linux_amd64/ts3server_minimal_runscript.sh", "inifile=ts3server.ini"]
