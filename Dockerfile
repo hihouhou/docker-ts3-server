@@ -10,7 +10,7 @@ MAINTAINER hihouhou < hihouhou@hihouhou.com >
 
 ## Set some variables for override.
 # Download Link of TS3 Server
-ENV TS3_VERSION 3.1.1 
+ENV TS3_VERSION 3.1.2
 ENV TEAMSPEAK_URL http://dl.4players.de/ts/releases/$TS3_VERSION/teamspeak3-server_linux_amd64-$TS3_VERSION.tar.bz2
 
 # Update & install packages for graylog
